@@ -6,9 +6,10 @@ from telegram.ext import Updater, CommandHandler, Filters, MessageHandler, Conve
 total_candies = 50
 max_candies = 8
 gamer = 1
-game_type = 0    # Переменная для выбора типа игры
+game_type = 0    
 gaming = False
-# Определяем константы этапов разговора
+
+
 CHOICE = 0
 
 def start(update, _):
@@ -16,9 +17,9 @@ def start(update, _):
     total_candies = 50
     gamer = 1
     gaming = True
-    # Список кнопок для ответа
-    reply_keyboard = [['Человек', 'Умный компьютер', 'Не очень умный компьютер']]
-    # Создаем простую клавиатуру для ответа
+    # Кнопки
+    reply_keyboard = [['Человек', 'Умный компьютер', 'Не умный компьютер']]
+   
     markup_key = ReplyKeyboardMarkup(reply_keyboard, one_time_keyboard=True)
     # Начинаем разговор с вопроса
     update.message.reply_text(
@@ -28,7 +29,7 @@ def start(update, _):
 
     return CHOICE
 
-# Обрабатываем выбор пользователя
+# Обрабатываем выбор
 def message(update, context):
     # определяем выбор
     global game_type
@@ -79,7 +80,7 @@ def game(update, context):
                 gaming = False
                 # total_candies = 50
                 return
-        if game_type == 'Не очень умный компьютер':   
+        if game_type == 'Не умный компьютер':   
             if total_candies <= max_candies:
                 take_candies = randint(1, total_candies)
             else:
